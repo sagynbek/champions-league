@@ -40,7 +40,10 @@ const MatchResults: FC<IProps> = (props) => {
 
     axiosInst.post(`simulate/season/${activeSeason}`)
       .then((res) => {
-        setResults(res.data.data);
+        axiosInst.get(`/plays/${activeWeek}`)
+          .then(res => {
+            setResults(res.data.data);
+          })
         refreshLeagues();
       })
   }
