@@ -15,7 +15,8 @@ class SeasonResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'name'    =>  "Season " . $this->id,
+            'name'      =>  "Season " . $this->id,
+            'weeks'     =>  WeekResource::collection($this->weeks),
         ];
     }
 }

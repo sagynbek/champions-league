@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\PlayController;
 use App\Http\Controllers\Api\PredictionController;
 use App\Http\Controllers\Api\SeasonController;
+use App\Http\Controllers\Api\SimulationController;
 use App\Http\Controllers\Api\WeekController;
 use App\Http\Controllers\Api\WeeklyStandingController;
 use App\Models\Prediction;
@@ -30,3 +31,5 @@ Route::apiResource('/plays/{week}', PlayController::class)->only([
   'index', 'update'
 ]);
 Route::get('/prediction/{season}', [PredictionController::class, 'index']);
+Route::post('/simulate/season/{season}', [SimulationController::class, 'simulateSeason']);
+Route::post('/simulate/week/{week}', [SimulationController::class, 'simulateWeek']);

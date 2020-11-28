@@ -17,7 +17,7 @@ class WeekResource extends JsonResource
         return [
             'id'        =>  $this->id,
             'week'      =>  $this->week,
-            // 'plays'     =>  $this->plays,
+            'plays'     =>  PlayResource::collection($this->plays),
             // 'standings' =>  $this->standings,
         ];
     }

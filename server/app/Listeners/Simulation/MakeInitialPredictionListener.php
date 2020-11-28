@@ -35,13 +35,24 @@ class MakeInitialPredictionListener
          */
 
         $teams = Team::all();
+        $teamsStrength = [];
+        $total = 0;
+
+        // Generate teams' initial powers
         foreach ($teams as $team) {
             $initStrength = $this->getInitialStrength($team);
+
+            $total += $initStrength;
+            $teamsStrength[$team->id] = $initStrength;
+        }
+
+        // Generate teams' initial powers
+        foreach ($teamsStrength as $teamId => $strength) {
             Prediction::create([
                 'season_id'         =>  $event->season->id,
-                'team_id'           =>  $team->id,
-                'initial_strength'  =>  $initStrength,
-                'computed_strength'  =>  $initStrength,
+                'team_id'           =>  $teamId,
+                'initial_strength'  =>  $strength,
+                'computed_strength'  =>  round($strength * 100 / $total),
             ]);
         }
     }
