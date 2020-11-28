@@ -17,6 +17,7 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         'App\Events\Season\SeasonCreatedEvent' => [
             'App\Listeners\Week\CreateWeeksListener',
+            'App\Listeners\Simulation\MakeInitialPredictionListener',
         ],
         'App\Events\Week\WeekCreatedEvent' => [
             'App\Listeners\Play\CreatePlaysListener',

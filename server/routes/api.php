@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\Api\PlayController;
+use App\Http\Controllers\Api\PredictionController;
 use App\Http\Controllers\Api\SeasonController;
 use App\Http\Controllers\Api\WeekController;
 use App\Http\Controllers\Api\WeeklyStandingController;
+use App\Models\Prediction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,3 +29,4 @@ Route::get('/weekly-standings/{week}', [WeeklyStandingController::class, 'index'
 Route::apiResource('/plays/{week}', PlayController::class)->only([
   'index', 'update'
 ]);
+Route::get('/prediction/{season}', [PredictionController::class, 'index']);

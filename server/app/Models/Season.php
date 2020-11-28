@@ -13,4 +13,9 @@ class Season extends Model
     {
         return $this->hasMany('App\Models\Week');
     }
+
+    public function predictions()
+    {
+        return $this->hasMany('App\Models\Prediction');
+    }
 }
