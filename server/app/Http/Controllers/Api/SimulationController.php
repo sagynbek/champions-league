@@ -24,7 +24,7 @@ class SimulationController extends Controller
     public function simulateWeek(Week $week)
     {
         $plays = $this->performWeekSimulation($week);
-        return response()->success(PlayResource::collection($plays));
+        return response()->success(PlayResource::collection($plays), "Week successfully simulated");
     }
 
     private function performWeekSimulation($week)
@@ -35,7 +35,7 @@ class SimulationController extends Controller
         foreach ($plays as $play) {
             $simulation = new SimulationService($play, $predictions);
             $scores = $simulation->simulate();
-            $play->gamePlayed($scores[0], $scores[1]);
+            $play->updatePlayedGame($scores[0], $scores[1]);
         }
         return $plays;
     }

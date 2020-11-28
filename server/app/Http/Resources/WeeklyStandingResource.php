@@ -17,7 +17,7 @@ class WeeklyStandingResource extends JsonResource
         return [
             'id'        =>  $this->id,
             'team'      =>  new TeamResource($this->team),
-            'position'  =>  $this->position,
+            // 'position'  =>  $this->position,
             'points'    =>  $this->points,
             'plays'     =>  $this->plays,
             'wins'      =>  $this->wins,

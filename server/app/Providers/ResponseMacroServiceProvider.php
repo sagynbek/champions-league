@@ -19,7 +19,7 @@ class ResponseMacroServiceProvider extends ServiceProvider
       $result = [
         'message' => [
           'status'  =>  true,
-          'message' =>  $message,
+          'text' =>  $message,
         ],
         'data'     =>  $data,
       ];
@@ -30,7 +30,7 @@ class ResponseMacroServiceProvider extends ServiceProvider
       $result = [
         'message' => [
           'status'  =>  false,
-          'message' =>  $message,
+          'text' =>  $message,
         ],
         'data'     =>  [],
       ];

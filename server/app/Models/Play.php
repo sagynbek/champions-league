@@ -37,12 +37,21 @@ class Play extends Model
         return WeeklyStanding::where('week_id', $this->week_id)->where('team_id', $this->team2_id)->firstOrFail();
     }
 
+    public function scopePlayed($query)
+    {
+        return $query->where('is_played', true);
+    }
+    public function scopeNotPlayed($query)
+    {
+        return $query->where('is_played', false);
+    }
+
     public function isGamePlayed()
     {
         return $this->is_played == true;
     }
 
-    public function gamePlayed($team1Score, $team2Score, $forceUpdate = false)
+    public function updatePlayedGame($team1Score, $team2Score, $forceUpdate = false)
     {
         if ($this->isGamePlayed() && $forceUpdate === false) {
             return;

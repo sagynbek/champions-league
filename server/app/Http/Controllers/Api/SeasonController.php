@@ -12,7 +12,7 @@ class SeasonController extends Controller
 {
     public function index()
     {
-        return SeasonResource::collection(Season::paginate());
+        return SeasonResource::collection(Season::all());
     }
 
     public function store()
