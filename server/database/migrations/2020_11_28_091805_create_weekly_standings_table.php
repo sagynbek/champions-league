@@ -17,15 +17,15 @@ class CreateWeeklyStandingsTable extends Migration
             $table->id();
             $table->integer('week_id');
             $table->integer('team_id');
-            $table->integer('position');
-            $table->integer('points');
-            $table->integer('plays');
-            $table->integer('wins');
-            $table->integer('draws');
-            $table->integer('loses');
-            $table->integer('goals_for');
-            $table->integer('goals_against');
-            $table->integer('goals_dif');
+            $table->integer('position')->default(0);
+            $table->integer('points')->default(0);
+            $table->integer('plays')->default(0);
+            $table->integer('wins')->default(0);
+            $table->integer('draws')->default(0);
+            $table->integer('loses')->default(0);
+            $table->integer('goals_for')->default(0);
+            $table->integer('goals_against')->default(0);
+            $table->integer('goals_dif')->default(0);
             $table->timestamps();
         });
     }
