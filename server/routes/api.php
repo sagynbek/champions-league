@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api\PlayController;
+use App\Http\Controllers\Api\SeasonController;
+use App\Http\Controllers\Api\WeekController;
+use App\Http\Controllers\Api\WeeklyStandingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +18,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::apiResource('/season', SeasonController::class)->only([
+  'index', // lists all seasons
+  'store', // to start new season
+]);
+Route::get('/week/{season}', [WeekController::class, 'index']);
+Route::get('/weekly-standings/{week}', [WeeklyStandingController::class, 'index']);
+Route::apiResource('/plays/{week}', PlayController::class)->only([
+  'index', 'update'
+]);
