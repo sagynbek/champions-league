@@ -22,6 +22,7 @@ class CreateTeamsTable extends Migration
             $table->timestamps();
         });
 
+        // seeds 4 teams into DB
         Artisan::call('db:seed', [
             '--class' => 'TeamSeeder',
             '--force' => true

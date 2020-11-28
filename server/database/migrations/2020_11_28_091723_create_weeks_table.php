@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTeamPlaysTable extends Migration
+class CreateWeeksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,10 @@ class CreateTeamPlaysTable extends Migration
      */
     public function up()
     {
-        Schema::create('team_plays', function (Blueprint $table) {
+        Schema::create('weeks', function (Blueprint $table) {
             $table->id();
-            $table->integer("play_id");
-            $table->integer("team1_id");
-            $table->integer("team2_id");
-            $table->integer("team1_score");
-            $table->integer("team2_score");
-            $table->integer("host_team_id");
+            $table->integer('season_id');
+            $table->integer('week');
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ class CreateTeamPlaysTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('team_plays');
+        Schema::dropIfExists('weeks');
     }
 }
