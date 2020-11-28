@@ -14,11 +14,19 @@ class PlayResource extends JsonResource
      */
     public function toArray($request)
     {
+        if ($this->is_played) {
+            return [
+                'team1'         =>  new TeamResource($this->team1),
+                'team2'         =>  new TeamResource($this->team2),
+                'team1_score'   =>  $this->team1_score,
+                'team2_score'   =>  $this->team2_score,
+                'status'        =>  'Played',
+            ];
+        }
         return [
-            'team1'         =>  $this->team1,
-            'team2'         =>  $this->team2,
-            'team1_score'   =>  $this->team1_score,
-            'team2_score'   =>  $this->team2_score,
+            'team1'         =>  new TeamResource($this->team1),
+            'team2'         =>  new TeamResource($this->team2),
+            'status'        =>  'NotPlayed',
         ];
     }
 }

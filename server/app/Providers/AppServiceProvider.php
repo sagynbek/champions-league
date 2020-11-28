@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Week;
+use App\Observers\WeekObserver;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 
@@ -25,5 +27,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+
+        Week::observe(WeekObserver::class);
     }
 }

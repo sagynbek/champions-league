@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Play extends Model
 {
     use HasFactory;
+    protected $fillable = ['week_id', 'team1_id', 'team2_id'];
 
     public function team1()
     {

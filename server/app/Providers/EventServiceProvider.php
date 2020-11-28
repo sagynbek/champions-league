@@ -18,6 +18,10 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\Season\SeasonCreatedEvent' => [
             'App\Listeners\Week\CreateWeeksListener',
         ],
+        'App\Events\Week\WeekCreatedEvent' => [
+            'App\Listeners\Play\CreatePlaysListener',
+            'App\Listeners\WeeklyStanding\CreateWeeklyStandingsListener',
+        ],
     ];
 
     /**
