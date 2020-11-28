@@ -40,3 +40,8 @@ export type IPrediction = {
 }
 
 export type IWeekGameStatus = | "None" | "Played" | "NotPlayed"
+
+export type IWeek = {
+  id: number,
+  week: number,
+}

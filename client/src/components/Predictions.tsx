@@ -9,7 +9,8 @@ interface IProps {
 const Predictions: FC<IProps> = (props) => {
   const [results, setResults] = useState<IPrediction[]>([]);
   const { activeSeason } = useSeasonContext();
-  const { activeWeek } = useWeekContext();
+  const { activeWeek, weeks } = useWeekContext();
+  const minWeek = weeks.length > 0 ? weeks[0].id : 0;
 
   useEffect(() => {
     if (activeSeason) {
@@ -39,7 +40,7 @@ const Predictions: FC<IProps> = (props) => {
   return (
     <table>
       <thead>
-        <tr>#{activeWeek} Week Prediction of Championship</tr>
+        <tr>#{activeWeek - minWeek + 1} Week Prediction of Championship</tr>
       </thead>
       <tbody>
         {predictionContainer}

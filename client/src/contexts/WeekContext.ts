@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
-import { IWeekGameStatus } from "../types/types";
+import { IWeek, IWeekGameStatus } from "../types/types";
 
 interface IContext {
+  weeks: IWeek[],
   activeWeek: number | undefined,
   setActiveWeek: React.Dispatch<React.SetStateAction<number | undefined>>,
   weekPlayedStatus: IWeekGameStatus,

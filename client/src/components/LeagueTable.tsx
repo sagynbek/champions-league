@@ -1,8 +1,8 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import { axiosInst } from '../api/Request';
 import { useLeagueContext } from '../contexts/LeagueContext';
 import { useSeasonContext } from '../contexts/SeasonContext';
-import { IWeeklyStanding } from '../types/types';
+import { useWeekContext } from '../contexts/WeekContext';
 
 
 interface IProps {
@@ -10,13 +10,14 @@ interface IProps {
 
 const LeagueTable: FunctionComponent<IProps> = (props) => {
   const { leagues, setLeagues, leagueRefreshKey } = useLeagueContext();
+  const { activeWeek } = useWeekContext();
   const { activeSeason } = useSeasonContext();
 
 
   useEffect(() => {
-    if (activeSeason) {
+    if (activeWeek) {
       const fetchLeagueData = async () => {
-        axiosInst.get(`/weekly-standings/${activeSeason}`)
+        axiosInst.get(`/weekly-standings/${activeWeek}`)
           .then(res => {
             setLeagues(res.data.data);
           })
@@ -27,9 +28,9 @@ const LeagueTable: FunctionComponent<IProps> = (props) => {
     else {
       setLeagues([]);
     }
-  }, [activeSeason, leagueRefreshKey]);
+  }, [activeSeason, leagueRefreshKey, activeWeek]);
 
-  if (!activeSeason) {
+  if (!activeWeek) {
     return null;
   }
 

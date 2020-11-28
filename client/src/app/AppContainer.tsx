@@ -5,8 +5,9 @@ import MatchResults from '../components/MatchResults';
 import Predictions from '../components/Predictions';
 import { WeekContext } from '../contexts/WeekContext';
 import { SeasonContext } from '../contexts/SeasonContext';
-import { ISeason, IWeekGameStatus, IWeeklyStanding } from '../types/types';
+import { ISeason, IWeek, IWeekGameStatus, IWeeklyStanding } from '../types/types';
 import { LeagueContext } from '../contexts/LeagueContext';
+import { axiosInst } from '../api/Request';
 
 
 
@@ -14,6 +15,7 @@ function AppContainer() {
   const [activeSeason, setActiveSeason] = useState<undefined | number>(undefined);
   const [seasons, setSeasons] = useState<ISeason[]>([]);
 
+  const [weeks, setWeeks] = useState<IWeek[]>([]);
   const [activeWeek, setActiveWeek] = useState<undefined | number>(undefined);
   const [weekPlayedStatus, setWeekPlayedStatus] = useState<IWeekGameStatus>("None");
   const [weekCount, setWeekCount] = useState(0);
@@ -23,7 +25,11 @@ function AppContainer() {
 
   useEffect(() => {
     if (activeSeason) {
-      setActiveWeek(1);
+      axiosInst.get(`/week/${activeSeason}`)
+        .then(res => {
+          setWeeks(res.data.data);
+          setActiveWeek(res.data.data[0].id);
+        })
     }
     else {
       setActiveWeek(undefined);
@@ -36,7 +42,7 @@ function AppContainer() {
 
   return (
     <SeasonContext.Provider value={{ activeSeason, setActiveSeason, seasons, setSeasons }}>
-      <WeekContext.Provider value={{ activeWeek, setActiveWeek, weekCount, setWeekCount, weekPlayedStatus, setWeekPlayedStatus }}>
+      <WeekContext.Provider value={{ weeks, activeWeek, setActiveWeek, weekCount, setWeekCount, weekPlayedStatus, setWeekPlayedStatus }}>
         <LeagueContext.Provider value={{ leagues, setLeagues, leagueRefreshKey, refreshLeagues }}>
           <div className="App">
             <header className="App-header">

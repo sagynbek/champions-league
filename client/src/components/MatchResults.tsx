@@ -8,10 +8,12 @@ import { useLeagueContext } from '../contexts/LeagueContext';
 interface IProps {
 }
 const MatchResults: FC<IProps> = (props) => {
-  const { activeWeek, weekPlayedStatus, weekCount, setActiveWeek, setWeekPlayedStatus } = useWeekContext();
+  const { weeks, activeWeek, weekPlayedStatus, weekCount, setActiveWeek, setWeekPlayedStatus } = useWeekContext();
   const { activeSeason } = useSeasonContext();
   const { refreshLeagues } = useLeagueContext();
   const [results, setResults] = useState<IMatchResult[]>([]);
+  const maxWeek = weeks.length > 0 ? weeks[weeks.length - 1].id : 0;
+  const minWeek = weeks.length > 0 ? weeks[0].id : 0;
 
   useEffect(() => {
     if (activeWeek) {
@@ -50,6 +52,23 @@ const MatchResults: FC<IProps> = (props) => {
       })
   }
 
+  const goToPrevWeek = () => {
+    if (!activeWeek) { return; }
+    setActiveWeek(activeWeek - 1);
+  }
+
+  const goToNextWeek = () => {
+    if (!activeWeek) { return; }
+    if (weekPlayedStatus === "Played") {
+      setActiveWeek(activeWeek + 1);
+    }
+    else {
+      window.toast("Please play this match before moving to next week", {
+        variant: "info"
+      });
+    }
+  }
+
   if (!activeWeek) {
     return null;
   }
@@ -77,7 +96,7 @@ const MatchResults: FC<IProps> = (props) => {
     <table>
       <thead>
         <tr>Match Results</tr>
-        <tr> #{activeWeek} Week match Result </tr>
+        <tr> #{activeWeek - minWeek + 1} Week match Result </tr>
       </thead>
       <tbody>
         {matchesContainer}
@@ -87,8 +106,8 @@ const MatchResults: FC<IProps> = (props) => {
       <button onClick={handlePlayWholeSeason}>Play Whole Season</button>
       <button onClick={handlePlayMatch} disabled={weekPlayedStatus === "Played" || weekPlayedStatus === "None"}>Play All</button>
 
-      <button onClick={() => { setActiveWeek(activeWeek - 1) }} disabled={activeWeek == 1}>Prev Week</button>
-      <button onClick={() => { setActiveWeek(activeWeek + 1) }} disabled={weekCount == activeWeek}>Next Week</button>
+      <button onClick={goToPrevWeek} disabled={activeWeek == minWeek}>Prev Week</button>
+      <button onClick={goToNextWeek} disabled={activeWeek == maxWeek}>Next Week</button>
     </table>
   );
 }
