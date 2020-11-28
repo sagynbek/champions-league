@@ -96,22 +96,23 @@ const MatchResults: FC<IProps> = (props) => {
   })
 
   return (
-    <table>
-      <thead>
-        <tr>Match Results</tr>
-        <tr> #{activeWeek - minWeek + 1} Week match Result </tr>
-      </thead>
-      <tbody>
-        {matchesContainer}
-      </tbody>
+    <div>
+      <h3>Match Results</h3>
+      <h4>#{activeWeek - minWeek + 1} Week match Result</h4>
+      <table>
+        <tbody>
+          {matchesContainer}
+        </tbody>
+      </table>
 
+      <div style={{ width: "100%" }}>
+        <button onClick={handlePlayWholeSeason}>Play Whole Season</button>
+        <button onClick={handlePlayMatch} disabled={weekPlayedStatus === "Played" || weekPlayedStatus === "None"}>Play All</button>
 
-      <button onClick={handlePlayWholeSeason}>Play Whole Season</button>
-      <button onClick={handlePlayMatch} disabled={weekPlayedStatus === "Played" || weekPlayedStatus === "None"}>Play All</button>
-
-      <button onClick={goToPrevWeek} disabled={activeWeek == minWeek}>Prev Week</button>
-      <button onClick={goToNextWeek} disabled={activeWeek == maxWeek}>Next Week</button>
-    </table>
+        <button onClick={goToPrevWeek} disabled={activeWeek == minWeek}>Prev Week</button>
+        <button onClick={goToNextWeek} disabled={activeWeek == maxWeek}>Next Week</button>
+      </div>
+    </div>
   );
 }
 

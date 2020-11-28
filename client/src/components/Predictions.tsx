@@ -32,20 +32,26 @@ const Predictions: FC<IProps> = (props) => {
   const predictionContainer = results.map(prediction => {
     return (
       <tr>
-        <td>{prediction.team.name}</td>
+        <td><img src={prediction.team.logo} />{prediction.team.name}</td>
         <td>{prediction.percent}%</td>
       </tr>
     )
   })
   return (
-    <table>
-      <thead>
-        <tr>#{activeWeek - minWeek + 1} Week Prediction of Championship</tr>
-      </thead>
-      <tbody>
-        {predictionContainer}
-      </tbody>
-    </table>
+    <div>
+      <h4>#{activeWeek - minWeek + 1} Week Prediction of Championship</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Teams</th>
+            <th>Win prediction %</th>
+          </tr>
+        </thead>
+        <tbody>
+          {predictionContainer}
+        </tbody>
+      </table>
+    </div>
   );
 }
 

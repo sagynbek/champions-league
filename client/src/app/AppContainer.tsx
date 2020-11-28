@@ -45,15 +45,18 @@ function AppContainer() {
       <WeekContext.Provider value={{ weeks, activeWeek, setActiveWeek, weekCount, setWeekCount, weekPlayedStatus, setWeekPlayedStatus }}>
         <LeagueContext.Provider value={{ leagues, setLeagues, leagueRefreshKey, refreshLeagues }}>
           <div className="App">
-            <header className="App-header">
-              <ListSeasons />
-
-              <LeagueTable />
-              <MatchResults />
-              {
-                weekPlayedStatus === "NotPlayed" &&
-                <Predictions />
-              }
+            <header className="App-header" >
+              <div style={{ marginBottom: "3em" }}>
+                <ListSeasons />
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "auto auto auto", gridColumnGap: "50px" }}>
+                <LeagueTable />
+                <MatchResults />
+                {
+                  weekPlayedStatus === "NotPlayed" &&
+                  <Predictions />
+                }
+              </div>
             </header>
           </div>
         </LeagueContext.Provider>
