@@ -23,6 +23,11 @@ class Week extends Model
 
     public function weeklyStandings()
     {
-        return $this->hasMany('App\Models\WeeklyStanding');
+        return $this->hasMany('App\Models\WeeklyStanding')->orderBy('points', 'desc');
+    }
+
+    public function previousWeek()
+    {
+        return Week::where('week', $this->week - 1)->where('season_id', $this->season_id)->first();
     }
 }

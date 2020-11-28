@@ -45,7 +45,7 @@ class SimulationService
     $score1 = 0;
     $score2 = 0;
 
-    if (abs($strength1 - $strength2) <= 5) {
+    if (abs($strength1 - $strength2) <= 1) {
       $gameFun = random_int(1, 4);
       $score1 += $gameFun;
       $score2 += $gameFun;
