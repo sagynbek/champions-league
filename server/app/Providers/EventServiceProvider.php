@@ -17,11 +17,15 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         'App\Events\Season\SeasonCreatedEvent' => [
             'App\Listeners\Week\CreateWeeksListener',
-            'App\Listeners\Simulation\MakeInitialPredictionListener',
+            'App\Listeners\Prediction\MakeInitialPredictionListener',
         ],
         'App\Events\Week\WeekCreatedEvent' => [
             'App\Listeners\Play\CreatePlaysListener',
             'App\Listeners\WeeklyStanding\CreateWeeklyStandingsListener',
+        ],
+        'App\Events\Play\PlayUpdatedEvent' => [
+            'App\Listeners\WeeklyStanding\UpdateWeeklyStandingListener',
+            'App\Listeners\Prediction\UpdateGamePredictionListener',
         ],
     ];
 

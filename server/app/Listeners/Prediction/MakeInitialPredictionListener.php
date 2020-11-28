@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Listeners\Simulation;
+namespace App\Listeners\Prediction;
 
 use App\Events\Season\SeasonCreatedEvent;
 use App\Models\Prediction;

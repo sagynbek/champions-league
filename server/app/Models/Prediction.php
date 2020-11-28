@@ -15,4 +15,20 @@ class Prediction extends Model
     {
         return $this->belongsTo('App\Models\Team');
     }
+
+    public function updatePrediction($play)
+    {
+        $result = $play->formatScoreForTeam($this->team_id);
+        $strengthToAdd = 0;
+
+        if ($result['goals_for'] === $result['goals_against']) { // Draw
+            $strengthToAdd = 1;
+        } else if ($result['goals_for'] > $result['goals_against']) { // Win
+            $strengthToAdd = 3;
+        } else {
+            $strengthToAdd = -3;
+        }
+        $this->computed_strength += $strengthToAdd;
+        $this->update();
+    }
 }
