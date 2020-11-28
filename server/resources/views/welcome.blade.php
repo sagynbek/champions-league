@@ -13,7 +13,17 @@
 </head>
 
 <body class="antialiased">
-  <div id="root"></div>
+  <div id="root">
+    <div>
+      Hello there, Please run client.
+    </div>
+    <div>
+      First npm install,
+    </div>
+    <div>
+      Then npm start
+    </div>
+  </div>
 </body>
 
 </html>
